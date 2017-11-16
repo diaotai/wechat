@@ -18,7 +18,19 @@ var config = {
 app.use(express.query());
 
 app.use('/', wechat(config, function (req, res, next) {
-    console.log("接收消息",req);
+    var message = req.weixin;
+    // let axios = require("axios");
+    
+    // axios.get(`http://www.tuling123.com/openapi/api?key=262202cd50b04864bb12238210d9845b&info=${message.}&userid=3245232`)
+    //   .then(function (response) {
+    //     console.log(response.data.text);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    // });
+      //你也可以这样回复text类型的信息 
+    
+    console.log("接收消息",message);
     res.reply({
         content: '你好，Hello World!',
         type: 'text'

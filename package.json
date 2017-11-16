@@ -2,6 +2,7 @@
     "name": "weapp",
     "version": "1.0.0",
     "dependencies": {
+        "axios": "^0.17.1",
         "express": "^4.16.2",
         "wechat": "^2.1.0"
     }
