@@ -21,9 +21,9 @@ app.use('/', wechat(config, function (req, res, next) {
     var message = req.weixin;
     let axios = require("axios");
     
-    axios.get(`http://www.tuling123.com/openapi/api?key=262202cd50b04864bb12238210d9845b&info=${message.content}&userid=${message.FromUserName}`)
+    axios.get(`http://www.tuling123.com/openapi/api?key=262202cd50b04864bb12238210d9845b&info=${message.Content}&userid=${message.FromUserName}`)
       .then(function (response) {
-        console.log(response.data.text);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
