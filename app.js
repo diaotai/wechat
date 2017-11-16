@@ -35,6 +35,7 @@ app.use(
         //console.log();
       })
       .catch(function(error) {
+        console.log("错误",err)
         res.reply({
           content: "出现错误",
           type: "text"
