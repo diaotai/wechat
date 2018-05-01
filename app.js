@@ -1,3 +1,5 @@
+// import { encode } from "punycode";
+
 // 引用 express 来支持 HTTP Server 的实现
 const express = require("express");
 
@@ -22,32 +24,43 @@ app.use(
   wechat(config, function(req, res, next) {
     var message = req.weixin;
     let axios = require("axios");
-
-    axios
+    console.log(message.MsgType)
+    console.log(Object.keys(message))
+    if(message.MsgType=="text"){
+      let url = `http://api.qingyunke.com/api.php?key=free&appid=0&msg=${message.Content}`;
+      axios
       .get(
-        `http://www.tuling123.com/openapi/api?key=262202cd50b04864bb12238210d9845b&info=${message.Content}&userid=${message.FromUserName}`
+        encodeURI(url)
       )
       .then(function(response) {
+        console.log(response.data.result,"!!!",response.data.content)
         res.reply({
-          content: response.data.text,
+          content: response.data.content,
           type: "text"
         });
         //console.log();
       })
       .catch(function(error) {
-        console.log("错误",err)
+        console.log("错误",Object.keys(error))
         res.reply({
           content: "出现错误",
           type: "text"
         });
       });
+    } else {
+      res.reply({
+        content: "暂不支持此种格式的自动回复",
+        type: "text"
+      });
+    }
+
   })
 );
 
-console.log("hello");
+//console.log("hello");
 
 // 监听端口，等待连接
-const port = 5050;
+const port = 8080;
 app.listen(port);
 
 // 输出服务器启动日志
